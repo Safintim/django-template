@@ -1,0 +1,23 @@
+version: "2"
+services:
+  base:
+    environment:
+    - PROD=1
+    - SECRET_KEY=61hB5199-1CvC-024C-7B4B-103123123368250469asd
+    - DEBUG=false
+    - HOST=https://example.ru/
+    - REDIS_HOST=redis://redis:6379
+    - DB_NAME=db_name
+    - DB_USER=db_user
+    - DB_PASSWORD=db_password
+    - DB_HOST=db_host
+    - DB_PORT=db_port
+    - EMAIL_HOST=email_smtp
+    - EMAIL_HOST_USER=email_user
+    - EMAIL_HOST_PASSWORD=email_password
+    - EMAIL_PORT=email_port
+    - FEEDBACK_MAIL=feedback_email
+    - SMS_TIMEOUT=100
+    - SMS_TOKEN=token
+    - FCM_SERVER_KEY=token
+    - PAGE_SIZE=20
