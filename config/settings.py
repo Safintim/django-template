@@ -9,7 +9,7 @@ DEBUG = os.getenv('DEBUG', 'true').lower() in ['yes', '1', 'true']
 ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
-    'grappelli',
+    'jet',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -63,14 +63,16 @@ TEMPLATES = [
 WSGI_APPLICATION = 'config.wsgi.application'
 
 if os.getenv('PROD', 'false').lower() not in ['yes', '1', 'true']:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    HOST = 'http://127.0.0.1:8000/'
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         }
     }
-    HOST = 'http://127.0.0.1:8000/'
 else:
+    HOST = os.getenv('HOST')
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -81,20 +83,23 @@ else:
             'PORT': os.getenv('DB_PORT'),
         }
     }
-    HOST = os.getenv('HOST')
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': 'django.contrib.auth.password_validation.'
+                'UserAttributeSimilarityValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME': 'django.contrib.auth.password_validation.'
+                'MinimumLengthValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.'
+                'CommonPasswordValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.'
+                'NumericPasswordValidator',
     },
 ]
 
@@ -229,7 +234,7 @@ FCM_DJANGO_SETTINGS = {
 }
 
 IMAGEKIT_CACHEFILE_DIR = 'static/uploads/files'
-IMAGEKIT_SPEC_CACHEFILE_NAMER = 'app.utils.imagekit_namers.source_name_as_path'
+IMAGEKIT_SPEC_CACHEFILE_NAMER = 'app.services.imagekit_namers.source_name_as_path'
 
 SMS_TIMEOUT = int(os.getenv('SMS_TIMEOUT', 6))
 SMS_TOKEN = os.getenv('SMS_TOKEN', 'token')

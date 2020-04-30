@@ -7,9 +7,9 @@ from app import models
 class UserAdmin(admin.ModelAdmin):
     list_display = list_display_links = (
         'id',
-        'phone',
+        'email',
     )
 
     search_fields = (
-        'phone',
+        'email',
     )

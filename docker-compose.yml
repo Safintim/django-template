@@ -19,7 +19,6 @@ services:
     depends_on:
     - redis
     volumes:
-    - /var/www/project/static/uploads/files/:/usr/src/app/static/uploads/files/
     - /var/www/project/static/:/usr/src/app/static/
     command: ["uwsgi", "--http", ":8000", "--processes", "25", "--threads", "4", "--wsgi-file", "config/wsgi.py"]
   redis:
@@ -39,25 +38,25 @@ services:
     - redis
     depends_on:
     - redis
-    volumes:
-    - /var/www/project/static/uploads/files/:/usr/src/app/static/uploads/files/
+    - volumes:
+    - /var/www/project/static/:/usr/src/app/static/
     command: ["celery", "worker", "-A", "config", "--loglevel=debug"]
-#  celery_beat:
-#    image: registry.ru/project:tag
-#    user: "33:33"
-#    ports: []
-#    extends:
-#      file: base.yml
-#      service: base
-#    networks:
-#    - elk
-#    links:
-#    - redis
-#    depends_on:
-#    - redis
-#    volumes:
-#    - /var/www/project/static/uploads/files/:/usr/src/app/static/uploads/files/
-#    command: ["celery", "beat", "-A", "config", "--loglevel=debug", "--scheduler", "django_celery_beat.schedulers:DatabaseScheduler", "--pidfile="]
+  celery_beat:
+    image: registry.ru/project:tag
+    user: "33:33"
+    ports: []
+    extends:
+      file: base.yml
+      service: base
+    networks:
+    - elk
+    links:
+    - redis
+    depends_on:
+    - redis
+    volumes:
+    - /var/www/project/static/:/usr/src/app/static/
+    command: ["celery", "beat", "-A", "config", "--loglevel=debug", "--scheduler", "django_celery_beat.schedulers:DatabaseScheduler", "--pidfile="]
   celery_flower:
     image: registry.ru/project:tag
     user: "33:33"
@@ -73,6 +72,6 @@ services:
     depends_on:
     - redis
     volumes:
-    - /var/www/project/static/uploads/files/:/usr/src/app/static/uploads/files/
+    - /var/www/project/static/:/usr/src/app/static/
     command: ["flower", "-A", "config", "--port=5555"]
 

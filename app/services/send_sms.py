@@ -2,6 +2,8 @@ import requests
 
 from django.conf import settings
 
+# legacy code
+
 service_codes = {
     100: "Смс-сообщение успешно отправлено.",
     200: "Неправильный api_id",
