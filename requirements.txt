@@ -8,7 +8,7 @@ djangorestframework-filters==1.0.0.dev0
 drf-yasg==1.17.0
 psycopg2==2.8.4
 Markdown==3.1.1
-Pillow==7.1.1
+Pillow==8.3.2
 uWSGI==2.0.18
 
 # wemake-python-styleguide==0.14.0
