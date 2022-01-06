@@ -15,7 +15,7 @@ uWSGI==2.0.18
 
 # optional
 redis==3.4.1
-celery==4.4.2
+celery==5.2.2
 django-celery-beat==2.0.0
 flower==0.9.3
 requests==2.22.0
